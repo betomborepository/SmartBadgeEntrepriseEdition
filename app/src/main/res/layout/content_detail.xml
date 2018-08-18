@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.smart.badge.DetailActivity"
+    tools:showIn="@layout/activity_detail">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/detail_matricul"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="matricul"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_matricul_value"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/name_line"
+            android:layout_below="@id/detail_matricul"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_name_value"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/name_line"
+            android:id="@+id/detail_surname_label"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="surname"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_surname_value"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/detail_surname_label"
+            android:id="@+id/active_line"
+            android:layout_marginBottom="@dimen/large_margin">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="classe"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/_profile_detail"
+                android:textStyle="bold"
+                android:id="@+id/detail_class_value"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/active_line"
+            android:id="@+id/button_assign_tag"
+            android:layout_marginBottom="@dimen/large_margin">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/medium_margin"
+                android:text="Configurer une carte pour l'élève courrant"
+                android:textAlignment="center"
+                android:onClick="goToAssignEleveToTag"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
