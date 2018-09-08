@@ -3,17 +3,13 @@ package com.smart.badge;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Point;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,10 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import adapters.entity.Eleve;
-import adapters.entity.Pointage;
-import adapters.entity.User;
 import service.DataCore;
 import service.NFCCore;
+import service.WebService;
+import service.handler.EmployerPointerHandler;
 
 
 public class NFCPointer extends AppCompatActivity {
@@ -96,35 +92,7 @@ public class NFCPointer extends AppCompatActivity {
 
     public void pointerUnEleve(final List<String> listId)
     {
-       //adapters.entity.Employe el = DataCore.GetEleveByImmatricule(id);
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        mDatabase = db.getReference("eleves");
-        ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Eleve eleve = postSnapshot.getValue(Eleve.class);
-                    if(listId.contains(eleve.immatricul) )
-                    {
-
-                        new DataCore().updatePointageEleve(eleve);
-                        Toast.makeText(getApplicationContext(), "l'élève a été pointer. Verifier son heure dans la secion pointage",
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(NFCPointer.this, MainActivity.class);
-                        startActivity(intent);
-                        return;
-                    }
-
-                    errorPointage();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
-            }
-        });
-
+        WebService.SendRequest(new EmployerPointerHandler(this, listId));
     }
 
     public void errorPointage()

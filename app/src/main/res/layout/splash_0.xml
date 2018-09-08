@@ -36,7 +36,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="@dimen/desc_padding"
                 android:paddingRight="@dimen/desc_padding"
-                android:text="Obtenez des informations sur vos élèves en scannan leurs badges"
+                android:text="Obtenez des informations sur vos employés en scannan leurs badges"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_desc"

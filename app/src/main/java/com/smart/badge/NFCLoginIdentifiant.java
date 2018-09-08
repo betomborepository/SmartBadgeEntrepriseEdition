@@ -1,5 +1,6 @@
 package com.smart.badge;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -7,12 +8,9 @@ import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,12 +18,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.InputStreamReader;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import adapters.entity.Eleve;
 import adapters.entity.User;
-import service.DataCore;
 import service.NFCCore;
+import service.SessionCore;
+import service.WebService;
+import service.handler.WebServiceHandler;
 
 
 public class NFCLoginIdentifiant extends AppCompatActivity {
@@ -79,13 +84,38 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
         setIntent(intent);
         Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
         String action = intent.getAction();
+        //Méthode qui va traiter le tag NFC
+        Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
+        final List<String> nfcVal = NFCCore.getNFCRecordList(intent);
+
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_TECH_DISCOVERED.equals(action))
         {
-            //Méthode qui va traiter le tag NFC
-            Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
-            final List<String> nfcVal = NFCCore.getNFCRecordList(intent);
+            final NFCLoginIdentifiant activity = this;
+            WebServiceHandler handler = new WebServiceHandler() {
+                @Override
+                public void onDataLoade(InputStreamReader stream) {
+                    List<User> listEmp = new Gson().fromJson(stream, new TypeToken<List<User>>(){}.getType());
+                    for (User user: listEmp) {
+                        if(user.id.equals(nfcVal)){
+                            activity.Connecter(user);
+                        }
+                    }
+                    activity.error();
+                }
+
+                @Override
+                public String GetUrl (){
+                    return  activity.getResources().getString(R.string.web_service_all_user_url);
+                }
+
+                @Override
+                public String getRequestMethod() {
+                    return  "GET";
+                }
+            };
+
 
 
 
@@ -99,11 +129,11 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         User user = postSnapshot.getValue(User.class);
 
-                        if(nfcVal.contains(user.immatricule))
+                        if(nfcVal.contains(user.id))
                         {
-                            Toast.makeText(getApplicationContext(), "Votre badge n'a été identifié. Bienvenue " + user.nom,
+                            Toast.makeText(getApplicationContext(), "Votre badge n'a été identifié. Bienvenue " + user.login,
                                     Toast.LENGTH_SHORT).show();
-                            Connecter("Admin");
+                            Connecter(user);
                             return;
                         }
                     }
@@ -117,9 +147,11 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
         }
     }
 
-    public void Connecter(String id)
+    public void Connecter(User user)
     {
-         startActivity(new Intent(NFCLoginIdentifiant.this, MainActivity.class));
+        SessionCore.initialiseSession(this, user);
+
+        startActivity(new Intent(NFCLoginIdentifiant.this, MainActivity.class));
     }
 
 

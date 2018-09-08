@@ -21,6 +21,8 @@ import java.util.List;
 
 import service.DataCore;
 import service.NFCCore;
+import service.WebService;
+import service.handler.LoginHandler;
 
 public class NFCIdentification extends AppCompatActivity {
 
@@ -84,40 +86,7 @@ public class NFCIdentification extends AppCompatActivity {
 
     public void pointerUnEleve(final List<String> listId)
     {
-        //adapters.entity.Employe el = DataCore.GetEleveByImmatricule(id);
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        mDatabase = db.getReference("eleves");
-        ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    adapters.entity.Eleve eleve = postSnapshot.getValue(adapters.entity.Eleve.class);
-                    if(listId.contains(eleve.immatricul) )
-                    {
-
-                        new DataCore().updatePointageEleve(eleve);
-                        Toast.makeText(getApplicationContext(), "l'élève a été identifier",
-                                Toast.LENGTH_SHORT).show();
-
-
-                        Intent intent = new Intent(NFCIdentification.this, DetailActivity.class);
-                        intent.putExtra("eleve", eleve);
-
-
-                        startActivity(intent);
-                        return;
-                    }
-
-                    errorPointage();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
-            }
-        });
-
+        WebService.SendRequest(new IdentificationHandler(this, listId));
     }
 
     public void errorPointage()

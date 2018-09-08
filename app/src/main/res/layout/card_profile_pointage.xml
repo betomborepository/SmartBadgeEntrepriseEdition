@@ -16,12 +16,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp" >
+        android:padding="16dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             android:id="@+id/item_image"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
@@ -39,13 +39,12 @@
             android:textSize="25sp" />
 
         <TextView
+            android:id="@+id/item_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_detail"
-            android:layout_toRightOf="@+id/item_image"
             android:layout_below="@+id/item_title"
-            android:text="25 juint 2016 :: 22h 15"
-            />
+            android:layout_toRightOf="@+id/item_image"
+            android:text="25 juint 2016 :: 22h 15" />
 
 
     </RelativeLayout>

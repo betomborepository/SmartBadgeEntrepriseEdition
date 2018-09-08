@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/modalFriendItemCard"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:id="@+id/rel_donnee"
+        android:visibility="visible"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:minHeight="70dp"
+        android:padding="@dimen/medium_margin"
+        android:focusable="true">
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_txtLine"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/profile_ic"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nom"
+                android:text="@string/profile_name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/date"
+                android:maxLines="2"
+                android:textSize="14sp"
+                android:text="@string/profile_detail" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_alignTop="@+id/profile_txtLine"
+            android:textSize="12sp"
+            android:maxWidth="100dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:id="@+id/montant"
+            android:layout_weight="2"
+            android:text="11:20"/>
+
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

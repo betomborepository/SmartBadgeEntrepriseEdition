@@ -83,30 +83,7 @@ public class ListBase extends Fragment {
         itemAnimator.setRemoveDuration(500);
         recyclerView.setItemAnimator(itemAnimator);
 
-        //Adding listener and action to each recyclerview card (recyclerview item)
-        /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this.getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
 
-                generateDetail(v, position);
-            }
-
-            @Override
-            public void onItemLongClick(View v, int position) {
-
-            }
-        }));*/
-
-        //the bottom icon, to add a new profile when it's clicked
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                profile_vAdapter.addprofile();
-                //swipe to the bottom to the new added profile
-                recyclerView.smoothScrollToPosition(profile_vAdapter.getItemCount());
-            }
-        });*/
 
 
         //swipeto refresh
@@ -185,7 +162,7 @@ public class ListBase extends Fragment {
             //Sending the selected profile data to the DetailActivity
             Bundle bundle = new Bundle();
             bundle.putInt("id", profile.id);
-            bundle.putString("name", profile.name);
+            bundle.putString("nom", profile.name);
             bundle.putString("about", profile.about);
             bundle.putString("time", profile.activeTime);
             bundle.putBoolean("isActive", profile.isActive);

@@ -17,10 +17,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.smart.badge.R;
 
+import adapters.entity.Eleve;
 import adapters.entity.User;
-import service.DataCore;
+import service.SessionCore;
+import service.WebService;
+import service.handler.LoginHandler;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -101,39 +103,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, 1000);
 
-
         //tester dans la base
-            FirebaseDatabase db = FirebaseDatabase.getInstance();
-            mDatabase = db.getReference("users");
-            ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        User user = postSnapshot.getValue(User.class);
-                        if(user.password.contains(password) && user.nom.contains(username))
-                        {
-                            GoTomainPage();
-                            return;
-                        }
-                    }
-                    Error();
-                }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
-            }
-        });
+        WebService.SendRequest(new LoginHandler(this, username, password));
     }
 
-    private void  GoTomainPage()
+    private Eleve getEmployeFromUser(User user)
+    {
+        //todo get the right value from base
+        Eleve employe = new Eleve();
+        employe.nom = "Nom Dummy";
+        employe.prenom = "Surnom Dummy";
+        employe.matricul = "userEmploy id";
+        return  employe;
+    }
+
+    public void  GoTomainPage()
     {
 
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 
 
-    private void Error()
+    public void Error()
     {
         Toast.makeText(getApplicationContext(), "Mot de passe ou compte erroné!",
                 Toast.LENGTH_SHORT).show();

@@ -20,6 +20,9 @@ import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
+import service.WebService;
+import service.handler.EmployeStatistiqueHandler;
+import service.handler.PointageStatistiqueHandler;
 
 public class StatistiquePointage extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class StatistiquePointage extends AppCompatActivity {
 
         ColumnChartData data = generatePieChartData();
         col.setColumnChartData(data);
+        WebService.SendRequest(new PointageStatistiqueHandler(col, this));
 
     }
 

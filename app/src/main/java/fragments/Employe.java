@@ -14,6 +14,8 @@ import adapters.Eleve_VAdapter;
 import adapters.Profile;
 import adapters.Profile_VAdapter;
 import service.DataCore;
+import service.WebService;
+import service.handler.ListEmployeHandler;
 
 
 /**
@@ -28,6 +30,9 @@ public class Employe extends ListBase {
 
         Activity a = this.getActivity();
 
-        new DataCore().GetListEleve(a,recyclerView);
+
+        String url =  getResources().getString(R.string.web_service_all_employe_url);
+        ListEmployeHandler handler = new ListEmployeHandler(url, a, recyclerView);
+        WebService.SendRequest(handler);
     }
 }

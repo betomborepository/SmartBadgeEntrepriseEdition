@@ -7,22 +7,14 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 import adapters.entity.Eleve;
-import service.DataCore;
 import service.NFCCore;
 
 
@@ -40,7 +32,7 @@ public class NFCApplyTagEleve extends AppCompatActivity {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         currentEleve =  (Eleve) getIntent().getSerializableExtra("eleve");
-        Toast.makeText(getApplicationContext(), "Approcher voter badge pour assigner l'immatricul de l'élève au tag",
+        Toast.makeText(getApplicationContext(), "Approcher voter badge pour assigner l'matricul de l'élève au tag",
                 Toast.LENGTH_SHORT).show();
 
     }
@@ -91,10 +83,10 @@ public class NFCApplyTagEleve extends AppCompatActivity {
 
     public void assignerTag(Intent intent)
     {
-        NdefRecord[] records= { new NFCCore().createRecord(currentEleve.immatricul)};
+        NdefRecord[] records= { new NFCCore().createRecord(currentEleve.matricul)};
        if( new NFCCore().saveDataToTag(records,intent))
         {
-            Toast.makeText(getApplicationContext(), "Ce tag a été assigné avec succés à " + currentEleve.surName + " avec comme immatriucle " + currentEleve.immatricul,
+            Toast.makeText(getApplicationContext(), "Ce tag a été assigné avec succés à " + currentEleve.prenom + " avec comme immatriucle " + currentEleve.matricul,
                     Toast.LENGTH_SHORT).show();
             Intent intent2 = new Intent(NFCApplyTagEleve.this, MainActivity.class);
             intent.putExtra("eleve",currentEleve);

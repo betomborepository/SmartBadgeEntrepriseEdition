@@ -2,14 +2,13 @@ package com.smart.badge;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -33,6 +32,9 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar tb = findViewById(R.id.toolbar);
+        tb.setTitle("Détail Employé");
+        tb.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
 
         //Getting data from the previous activity (MainActivity)
@@ -56,18 +58,24 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initialize(Eleve el) {
 
-        toolbar.setTitle(el.shortDescription());
-        AppCompatTextView detail_class = findViewById(R.id.detail_class_value);
+         AppCompatTextView heading1 = findViewById(R.id.detail_heading_1);
+        AppCompatTextView heading2 = findViewById(R.id.detail_heading_2);
+
+        heading1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        heading2.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+
+
         AppCompatTextView detail_immatricul = findViewById(R.id.detail_matricul_value);
         AppCompatTextView detail_surName = findViewById(R.id.detail_surname_value);
          detail_name = findViewById(R.id.detail_name_value);
 
         //AppCompatTextView detail_description = findViewById(R.id.det);
 
-        detail_immatricul.setText(el.immatricul);
-        detail_name.setText(el.name);
-        detail_surName.setText(el.surName);
-        detail_class.setText(el.classe);
+        detail_immatricul.setText(el.matricul);
+        detail_name.setText(el.nom);
+        detail_surName.setText(el.prenom);
+
+
     }
 
     public void goToAssignEleveToTag(View v)
@@ -78,4 +86,14 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    public void onClickBouttonModifier(View v){
+        Intent intent = new Intent(DetailActivity.this, CreationActivity.class);
+        intent.putExtra("userEmploy",currentEleve);
+        startActivity(intent);
+    }
+
+
+    public  void onClickBouttonRetour(View view){
+        this.finish();
+    }
 }

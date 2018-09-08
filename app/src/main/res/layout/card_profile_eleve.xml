@@ -62,19 +62,6 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_alignTop="@+id/profile_txtLine"
-            android:textSize="12sp"
-            android:maxWidth="100dp"
-            android:layout_marginTop="15dp"
-            android:layout_alignParentEnd="true"
-            android:visibility="visible"
-            android:id="@+id/active_time"
-            android:text="11:20"/>
-
 
         <!-- This is gone(invisible) at the default,
          if the user is active, we will show it

@@ -27,19 +27,31 @@ public class MainTabsFragments extends Fragment {
     ViewPager pager;
     public MainPager_VAdapter adapter;
     TabLayout tabs;
-    CharSequence Titles[] = {"Home", "Elève", "Pointage"};
-    int Numboftabs = 3;
+    CharSequence AdminTitles[] = {"Home", "Employé", "Pointage", "Statistique"};
+    int AdminNumboftabs = 4;
+    CharSequence EmployeTitles[] = {"Home", "Pointage"};
+    int EmployeNumboftabs = 2;
+    CharSequence CantineTitles[] = {"Home", "Transaction"};
+    int CantineNumboftabs = 1;
+
+    String userType;
+
+
+    public void setUserType(String type){
+        userType = type;
+    }
 
     public MainTabsFragments() {
         //required empty constructor
     }
+
 
     @SuppressWarnings({"ConstantConditions", "deprecation"})
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new MainPager_VAdapter(getChildFragmentManager(), Titles, Numboftabs);
+        adapter = new MainPager_VAdapter(getChildFragmentManager(), AdminTitles, AdminNumboftabs, userType);
 
         pager = getView().findViewById(R.id.mainPager);
         pager.setAdapter(adapter);

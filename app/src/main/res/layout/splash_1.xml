@@ -36,7 +36,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="@dimen/desc_padding"
                 android:paddingRight="@dimen/desc_padding"
-                android:text="Améliorez le suivit de vos élèves"
+                android:text="Améliorez le suivit de vos employés"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_desc"

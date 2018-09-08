@@ -36,7 +36,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="@dimen/desc_padding"
                 android:paddingRight="@dimen/desc_padding"
-                android:text="Gérez rapidement les informations critiques de votre établissement à tout moment"
+                android:text="Gérez rapidement les informations critiques de votre entreprise à tout moment"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_desc"

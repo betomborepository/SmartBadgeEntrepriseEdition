@@ -228,5 +228,19 @@ public class NFCCore {
         return true;
     }
 
+    public  static boolean emptyTage(Intent intent){
+
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        if (tag == null)
+            return false;
+
+        NdefMessage ndefMessage = new NdefMessage(new NdefRecord(NdefRecord.TNF_EMPTY, null, null, null));
+        writeTag(ndefMessage,tag);
+
+        return true;
+    }
+
+
+
 
 }

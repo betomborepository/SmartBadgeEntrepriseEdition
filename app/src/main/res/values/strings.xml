@@ -28,4 +28,14 @@
     <string name="title_activity_nfclogin_identifiant">NFCLoginIdentifiant</string>
     <string name="title_activity_nfcapply_tag_elev">NFCApplyTagElev</string>
     <string name="title_activity_nfcapply_tag_eleve">NFCApplyTagEleve</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <string name="web_service_all_user_url">https://stark-island-38001.herokuapp.com/api/user/getall</string>
+    <string name="web_service_all_employe_url">https://stark-island-38001.herokuapp.com/api/employe/getall</string>
+    <string name="web_service_all_pointage_url">https://stark-island-38001.herokuapp.com/api/pointage/getall</string>
+    <string name="web_service_login_url">https://stark-island-38001.herokuapp.com/api/user/login</string>
+    <string name="web_service_employe_stastique_url">https://stark-island-38001.herokuapp.com/api/employe/statistique</string>
+    <string name="web_service_pointage_stastique_url">https://stark-island-38001.herokuapp.com/api/pointage/statistique</string>
+    <string name="web_service_pointage_update_url">https://stark-island-38001.herokuapp.com/api/pointage/add</string>
+
 </resources>

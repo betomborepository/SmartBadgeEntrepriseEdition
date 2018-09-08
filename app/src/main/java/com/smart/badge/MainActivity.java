@@ -12,6 +12,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,7 +26,9 @@ import adapters.Profile;
 import adapters.Profile_VAdapter;
 
 import adapters.entity.Eleve;
+import adapters.entity.User;
 import fragments.MainTabsFragments;
+import service.SessionCore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar tb = findViewById(R.id.toolbar);
-        tb.setTitle("Smart Badge");
+        User currentUser = SessionCore.getCurrentUser(this);
+        tb.setTitle("Smart Badge[" + currentUser.type  +"]");
         tb.setTitleTextColor(Color.parseColor("#FFFFFF"));
-
+        this.setSupportActionBar(tb);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         MainTabsFragments fragment = new MainTabsFragments();
+        fragment.setUserType(currentUser.type);
         fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
     }
 
@@ -69,9 +75,55 @@ public class MainActivity extends AppCompatActivity {
 
     public void goDetailEleve(View v)
     {
-        Eleve el = (Eleve) v.findViewById(R.id.detail).getTag();
+        View icon =  v.findViewById(R.id.detail);
+        Eleve el = (Eleve) v.getTag();
+        if(icon != null){
+             el = (Eleve) v.findViewById(R.id.detail).getTag();
+        }
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("eleve", el);
         startActivity(intent);
+    }
+
+
+    public void goStatistiqueEmploye(View v){
+        startActivity(new Intent(MainActivity.this, StatistiqueEmploye.class));
+    }
+
+    public void goStatistiquePointage(View v){
+        startActivity(new Intent(MainActivity.this, StatistiquePointage.class));
+    }
+
+    public void configurer(View v){
+        startActivity(new Intent(MainActivity.this, ListEmployeConfiguration.class));
+    }
+
+    public void GotoPagePaiement(View v){
+        startActivity(new Intent(MainActivity.this, PagePaiement.class));
+    }
+
+    public void reset(View v){
+        startActivity(new Intent(MainActivity.this, NFCReset.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.logout);
+        final MainActivity activity = this;
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                activity.Logout();
+                return false;
+            }
+        });
+        return true;
+    }
+
+    public void Logout(){
+        SessionCore.logout(this);
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 }

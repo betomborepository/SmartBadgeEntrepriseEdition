@@ -1,7 +1,5 @@
 package adapters.entity;
 
-import android.graphics.Point;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,22 +9,26 @@ import java.util.List;
  */
 
 public class Eleve implements Serializable{
-    public String name;
-    public  String surName;
-    public  String classe;
+    public  String id;
+    public String nom;
+    public  String prenom;
     public  String description;
-    public  String immatricul;
+    public  String matricul;
+    public Fonction employeFonction;
+    public  String age;
+    public  String adresse;
     List<Pointage> listPointage;
+    public int argent = 20;
 
     public Eleve(){
 
     }
     public Eleve(String name, String surName, String description, String immatricul)
     {
-        this.name = name;
-        this.surName = surName;
+        this.nom = name;
+        this.prenom = surName;
         this.description = description;
-        this.immatricul = immatricul;
+        this.matricul = immatricul;
     }
 
 
@@ -37,8 +39,8 @@ public class Eleve implements Serializable{
 
     public String getListName()
     {
-        String listName = name + " " + surName + " " + immatricul;
-        int tailleLimit = 20;
+        String listName = nom + " " + prenom + "  [" + matricul + "]";
+        int tailleLimit = 35;
         if(listName.length() >= tailleLimit)
         return listName.substring(0, tailleLimit) + "...";
 
@@ -48,8 +50,17 @@ public class Eleve implements Serializable{
     public void generatePointage()
     {
         listPointage = new ArrayList<Pointage>();
-
-
     }
+
+    public Transaction depenser(int montant){
+        this.argent --;
+        Transaction t = new Transaction();
+        t.montant = montant;
+        t.nomEleve = this.nom;
+        t.IDEleve = this.matricul;
+        return  t;
+    }
+
+
 }
 

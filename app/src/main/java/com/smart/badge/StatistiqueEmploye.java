@@ -28,6 +28,8 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
+import service.WebService;
+import service.handler.EmployeStatistiqueHandler;
 
 public class StatistiqueEmploye extends AppCompatActivity {
 
@@ -41,8 +43,7 @@ public class StatistiqueEmploye extends AppCompatActivity {
 
         // TODO: 18/08/2018 add check null  and implement real data
 
-        PieChartData data = generatePieChartData();
-        pie.setPieChartData(data);
+        WebService.SendRequest(new EmployeStatistiqueHandler(pie, this));
 
     }
 

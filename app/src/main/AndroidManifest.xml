@@ -19,6 +19,12 @@
             android:name=".IntroActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -73,29 +79,50 @@
             android:name=".NFCApplyTagEleve"
             android:label="@string/title_activity_nfcapply_tag_eleve"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".StatistiqueEmploye"
             android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".StatistiquePointage"
             android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CreationActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".NFCReset"
+            android:label="@string/title_activity_nfclogin_identifiant"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NFCConfiguration"
+            android:label="@string/title_activity_nfclogin_identifiant"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NFCPaiement"
+            android:label="@string/title_activity_nfclogin_identifiant"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListEmployeConfiguration"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PagePaiement"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 
