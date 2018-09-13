@@ -8,7 +8,7 @@ import java.util.List;
  * Created by hp on 22/05/2018.
  */
 
-public class Eleve implements Serializable{
+public class Employe implements Serializable{
     public  String id;
     public String nom;
     public  String prenom;
@@ -20,10 +20,10 @@ public class Eleve implements Serializable{
     List<Pointage> listPointage;
     public int argent = 20;
 
-    public Eleve(){
+    public Employe(){
 
     }
-    public Eleve(String name, String surName, String description, String immatricul)
+    public Employe(String name, String surName, String description, String immatricul)
     {
         this.nom = name;
         this.prenom = surName;
@@ -57,7 +57,7 @@ public class Eleve implements Serializable{
         Transaction t = new Transaction();
         t.montant = montant;
         t.nomEleve = this.nom;
-        t.IDEleve = this.matricul;
+        t.idEleve = this.matricul;
         return  t;
     }
 

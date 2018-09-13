@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 
 /**
  * Created by hp on 08/09/2018.
@@ -26,7 +26,7 @@ public class UpdateHandler extends  WebServiceHandler {
     public void onDataLoade(InputStreamReader stream) {
         if (stream == null)
             return;
-        List<Eleve> listEleve = new Gson().fromJson(stream, new TypeToken<List<Eleve>>(){}.getType());
+//        List<Employe> listEleve = new Gson().fromJson(stream, new TypeToken<List<Employe>>(){}.getType());
 
     }
 
@@ -37,6 +37,6 @@ public class UpdateHandler extends  WebServiceHandler {
 
     @Override
     public String getRequestMethod() {
-        return "POST";
+        return "GET";
     }
 }

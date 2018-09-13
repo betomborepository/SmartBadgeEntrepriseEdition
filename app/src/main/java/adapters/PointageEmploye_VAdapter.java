@@ -2,7 +2,6 @@ package adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import com.smart.badge.R;
 
 import java.util.List;
 
-import adapters.Pointage_VHolder;
 import adapters.entity.Pointage;
 
 
@@ -44,7 +42,7 @@ public class PointageEmploye_VAdapter extends   Pointage_VAdapter
     @Override
     public void onBindViewHolder(@NonNull Pointage_VHolder holder, int position) {
         Pointage p = getPointage(position);
-         holder.pointage_heure.setText(p.getDate());
+         holder.pointage_heure.setText(p.getCreatedAt());
         //holder.pointage_poste.setText(p.getPoste());
     }
 

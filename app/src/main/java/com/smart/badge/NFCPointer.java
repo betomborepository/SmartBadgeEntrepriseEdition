@@ -12,16 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-import adapters.entity.Eleve;
-import service.DataCore;
 import service.NFCCore;
 import service.WebService;
 import service.handler.EmployerPointerHandler;
@@ -43,7 +37,7 @@ public class NFCPointer extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
 
-        Toast.makeText(getApplicationContext(), "Approcher voter badge pour pointer l'élève",
+        Toast.makeText(getApplicationContext(), "Approcher voter badge pour pointer l'employé",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -97,7 +91,7 @@ public class NFCPointer extends AppCompatActivity {
 
     public void errorPointage()
     {
-        Toast.makeText(getApplicationContext(), "Elève non reconnu!",
+        Toast.makeText(getApplicationContext(), "Employé non reconnu!",
                 Toast.LENGTH_SHORT).show();
     }
 

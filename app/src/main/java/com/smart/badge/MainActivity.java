@@ -3,29 +3,20 @@ package com.smart.badge;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Helpers.RecyclerItemClickListener;
-import adapters.Profile;
 import adapters.Profile_VAdapter;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 import adapters.entity.User;
 import fragments.MainTabsFragments;
 import service.SessionCore;
@@ -76,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
     public void goDetailEleve(View v)
     {
         View icon =  v.findViewById(R.id.detail);
-        Eleve el = (Eleve) v.getTag();
+        Employe el = (Employe) v.getTag();
         if(icon != null){
-             el = (Eleve) v.findViewById(R.id.detail).getTag();
+             el = (Employe) v.findViewById(R.id.detail).getTag();
         }
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("eleve", el);

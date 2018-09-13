@@ -4,12 +4,7 @@ import android.app.Activity;
 
 import com.smart.badge.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import adapters.Eleve_VAdapter;
-import adapters.entity.Eleve;
-import service.DataCore;
 import service.WebService;
 import service.handler.ListEmployeHandler;
 

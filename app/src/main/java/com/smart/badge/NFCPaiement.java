@@ -19,23 +19,28 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import adapters.entity.Employe;
 import service.DataCore;
 import service.NFCCore;
+import service.WebService;
+import service.handler.EmployePaimentHandler;
 
 public class NFCPaiement extends AppCompatActivity {
 
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
-    private  int montantDepense = 0;
+    private  String montantDepense = "";
     private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_paiement);
+
+        this.montantDepense = this.getIntent().getStringExtra("montant");
+
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        montantDepense = getIntent().getIntExtra("montant", 0);
     }
 
 
@@ -79,57 +84,45 @@ public class NFCPaiement extends AppCompatActivity {
             Log.e("Entree NewIntent","mmmmmmmmmm-onNewIntent");
             List<String> nfcVal = NFCCore.getNFCRecordList(intent);
 
-            pointerUnEleve(nfcVal);
+            DepenserEmployeArgent(nfcVal);
         }
     }
 
-    public void pointerUnEleve(final List<String> listId)
+    public void DepenserEmployeArgent(final List<String> listId)
     {
-        //adapters.entity.Employe el = DataCore.GetEleveByImmatricule(id);
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        mDatabase = db.getReference("eleves");
-        ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    adapters.entity.Eleve eleve = postSnapshot.getValue(adapters.entity.Eleve.class);
-                    if(listId.contains(eleve.matricul) )
-                    {
-                        adapters.entity.Transaction t  = eleve.depenser(montantDepense);
-                        new DataCore().updateEmploye(eleve);
-
-
-
-
-                        new DataCore().createTransaction(t);
-                        Toast.makeText(getApplicationContext(), "l'élève a été identifier",
-                                Toast.LENGTH_SHORT).show();
-
-
-                        Intent intent = new Intent(NFCPaiement.this, DetailActivity.class);
-                        intent.putExtra("eleve", eleve);
-
-
-                        startActivity(intent);
-                        return;
-                    }
-
-                    errorPointage();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
-            }
-        });
-
+        String parsedListID = parsedId(listId);
+        String url = this.getResources().getString(R.string.web_service_employe_update_paiement_url) + "?id=" + parsedListID + "&argent=" + this.montantDepense;
+        WebService.SendRequest(new EmployePaimentHandler(url, this));
     }
 
-    public void errorPointage()
+    public String  parsedId(List<String> listId){
+        String delemitier = "";
+        String parsed = "";
+        for (String id: listId
+             ) {
+
+            parsed += id + delemitier;
+
+            delemitier ="|";
+        }
+        return  parsed;
+    }
+
+
+    public void errorPaiment()
     {
-        Toast.makeText(getApplicationContext(), "Elève non reconnu!",
+        Toast.makeText(getApplicationContext(), "Montant insuffisant",
                 Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(NFCPaiement.this, PagePaiement.class);
+        startActivity(intent)  ;
+    }
+
+    public  void GotoMainPage(){
+
+        Toast.makeText(getApplicationContext(), "Le paiement a été fait avec succés",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(NFCPaiement.this, MainActivity.class);
+        startActivity(intent);
     }
 
 

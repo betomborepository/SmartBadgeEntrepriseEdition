@@ -20,9 +20,9 @@ import adapters.EleveConfiguration_VAdapter;
 import adapters.Eleve_VAdapter;
 import adapters.PointageEmploye_VAdapter;
 import adapters.Pointage_VAdapter;
+import adapters.entity.Employe;
 import adapters.entity.Transaction;
 import adapters.Transaction_VAdapter;
-import adapters.entity.Eleve;
 import adapters.entity.Pointage;
 
 /**
@@ -34,9 +34,9 @@ public  class DataCore
     private DatabaseReference mDatabase;
 // ...
 
-    public  List<Eleve> GetListEleve(final Activity a,final RecyclerView recyclerView)
+    public  List<Employe> GetListEleve(final Activity a, final RecyclerView recyclerView)
     {
-         final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
+         final List<Employe>  listEleve = new ArrayList<Employe>() ;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         mDatabase = db.getReference("eleves");
@@ -47,7 +47,7 @@ public  class DataCore
                  Log.d("RealTimeDatabase", "Value is 1: ");
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Eleve e = postSnapshot.getValue(Eleve.class);
+                    Employe e = postSnapshot.getValue(Employe.class);
 
                     listEleve.add(e);
                     Log.d("eleve",e.nom);
@@ -72,9 +72,9 @@ public  class DataCore
     }
 
 
-    public  List<Eleve> GetListEleveConfirutation(final Activity a,final RecyclerView recyclerView)
+    public  List<Employe> GetListEleveConfirutation(final Activity a, final RecyclerView recyclerView)
     {
-        final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
+        final List<Employe>  listEleve = new ArrayList<Employe>() ;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         mDatabase = db.getReference("eleves");
@@ -85,7 +85,7 @@ public  class DataCore
                 Log.d("RealTimeDatabase", "Value is 1: ");
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Eleve e = postSnapshot.getValue(Eleve.class);
+                    Employe e = postSnapshot.getValue(Employe.class);
 
                     listEleve.add(e);
                     Log.d("eleve",e.nom);
@@ -184,7 +184,7 @@ public  class DataCore
 
 
    
-    void updateEmploye(Eleve el, Pointage p)
+    void updateEmploye(Employe el, Pointage p)
     {
             // chercher ajouter le pontage dans l'élève
         // ajouter un pointage dans le pointge genenal
@@ -196,21 +196,21 @@ public  class DataCore
     }
 
 
-    public Eleve GetEleveByImmatricule(final String id)
+    public Employe GetEleveByImmatricule(final String id)
     {
-        final List<Eleve>  listEleve = new ArrayList<Eleve>() ;
+        final List<Employe>  listEleve = new ArrayList<Employe>() ;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         mDatabase = db.getReference("eleves");
-        Eleve r = new Eleve() ;
+        Employe r = new Employe() ;
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("RealTimeDatabase", "Value is 1: ");
-                Eleve retour =new Eleve();
+                Employe retour =new Employe();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Eleve e = postSnapshot.getValue(Eleve.class);
+                    Employe e = postSnapshot.getValue(Employe.class);
 
                     listEleve.add(e);
                     Log.d("eleve",e.nom);
@@ -231,12 +231,12 @@ public  class DataCore
         return r;
     }
 
-    public   void updateEmploye(Eleve el)
+    public   void updateEmploye(Employe el)
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         mDatabase = db.getReference("pointages");
         String key = mDatabase.child("child").push().getKey();
-        Pointage p =    new Pointage("testid","poste 777", el.shortDescription(), el.matricul);
+        Pointage p =    new Pointage("testid","poste 777");
         mDatabase.child(key).setValue(p);
        // mDatabase.child("house").child(key).setValue(p);
     }
@@ -248,8 +248,8 @@ public  class DataCore
         List<Transaction> listTransaction = new ArrayList<Transaction>(){};
 
         Transaction t = new Transaction();
-        t.nomEleve = "Eleve";
-        t.IDEleve = "EL54";
+        t.nomEleve = "Employe";
+        t.idEleve = "EL54";
         t.date = new Date().toString();
         t.montant = 400;
 

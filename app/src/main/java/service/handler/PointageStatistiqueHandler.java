@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,8 +18,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import adapters.entity.PointageSatistique;
-import adapters.entity.User;
-import fragments.Pointage;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Column;

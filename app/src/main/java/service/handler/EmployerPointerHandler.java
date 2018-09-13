@@ -12,8 +12,7 @@ import com.smart.badge.R;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import adapters.entity.Eleve;
-import service.DataCore;
+import adapters.entity.Employe;
 import service.WebService;
 
 /**
@@ -34,12 +33,12 @@ public class EmployerPointerHandler  extends  WebServiceHandler{
 public void onDataLoade(InputStreamReader stream) {
         if (stream == null)
         return;
-    List<Eleve> listEleve = new Gson().fromJson(stream, new TypeToken<List<Eleve>>(){}.getType());
-    for (Eleve emp: listEleve) {
+    List<Employe> listEleve = new Gson().fromJson(stream, new TypeToken<List<Employe>>(){}.getType());
+    for (Employe emp: listEleve) {
         if(listID.contains( emp.matricul)){
 
             //update
-           Toast.makeText(this.nfcPointer.getApplicationContext(), "l'élève a été pointer. Verifier son heure dans la secion pointage",
+           Toast.makeText(this.nfcPointer.getApplicationContext(), "l'employe a été pointer. Verifier son heure dans la secion pointage",
                     Toast.LENGTH_SHORT).show();
 
             String updateUrl = this.nfcPointer.getResources().getString(R.string.web_service_pointage_update_url) + "?employe=" + emp.id + "&lieu=" + this.lieu;
@@ -56,7 +55,7 @@ public void onDataLoade(InputStreamReader stream) {
 
 @Override
 public String GetUrl() {
-        return url;
+        return this.nfcPointer.getResources().getString(R.string.web_service_all_employe_url);
         }
 
     @Override

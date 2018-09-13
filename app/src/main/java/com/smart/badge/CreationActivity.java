@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.Profile;
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
+import service.WebService;
+import service.handler.UpdateEmployeHandler;
 
 public class CreationActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class CreationActivity extends AppCompatActivity {
     private AppCompatTextView detail_name, detail_about, detail_active_time;
 
     private Profile profile;
-    private Eleve currentEleve;
+    public Employe currentEleve;
 
 
     @Override
@@ -41,7 +43,8 @@ public class CreationActivity extends AppCompatActivity {
         tb.setTitle("Creation");
 
         tb.setTitleTextColor(Color.parseColor("#FFFFFF"));
-        Eleve employe = (Eleve) this.getIntent().getSerializableExtra("userEmploy");
+        Employe employe = (Employe) this.getIntent().getSerializableExtra("userEmploy");
+        currentEleve = employe;
         Button valider = this.findViewById(R.id.boutton_valider);
         valider.setTag("creation");
 
@@ -75,7 +78,7 @@ public class CreationActivity extends AppCompatActivity {
     }
 
 
-    private void initialize(Eleve el) {
+    private void initialize(Employe el) {
 
         toolbar.setTitle(el.shortDescription());
         AppCompatTextView heading1 = findViewById(R.id.detail_heading_1);
@@ -94,8 +97,6 @@ public class CreationActivity extends AppCompatActivity {
         detail_immatricul.setText(el.matricul);
         detail_name.setText(el.nom);
         detail_surName.setText(el.prenom);
-
-
     }
 
     public void goToAssignEleveToTag(View v)
@@ -107,10 +108,32 @@ public class CreationActivity extends AppCompatActivity {
     }
 
     public void onClickBouttonVallider(View v){
-        //todo to implement validation of modification or creation
+        EditText nom = this.findViewById(R.id.nom);
+        EditText prenom = this.findViewById(R.id.prenom);
+        EditText age = this.findViewById(R.id.age);
+        EditText adresse = this.findViewById(R.id.adresse  );
+
+        EditText matricul = this.findViewById(R.id.matricule);
+        EditText nomFonction = this.findViewById(R.id.nom_fonction);
+        Spinner spinner = this.findViewById(R.id.departement);
+        String departement = spinner.getSelectedItem().toString();
+        detail_name = findViewById(R.id.detail_name_value);
+
+
+        String param = "?id=" + currentEleve.id +"&nom=" + nom.getText() + "&prenom=" + prenom.getText() + "&age=" + age.getText()
+                + "&adresse=" + adresse.getText() + "&matricul=" + matricul.getText() + "&nomFonction=" + nomFonction.getText()
+                +  "&departementFonction=" + departement;
+        String url = this.getResources().getString(R.string.web_service_update_employe_url) + param;
+
+        WebService.SendRequest(new UpdateEmployeHandler(url, this));
     }
 
     public  void onClickBouttonAnnuler(View view){
         this.finish();
+    }
+    public  void GoDetail(){
+        Intent intent = new Intent(CreationActivity.this, DetailActivity.class);
+        intent.putExtra("eleve",currentEleve);
+        startActivity(intent);
     }
 }

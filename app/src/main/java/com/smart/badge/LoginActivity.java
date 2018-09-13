@@ -3,24 +3,17 @@ package com.smart.badge;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 import adapters.entity.User;
-import service.SessionCore;
 import service.WebService;
 import service.handler.LoginHandler;
 
@@ -88,29 +81,16 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog.show();
         //waiting for 3sec before running this process
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    progressDialog.dismiss();
-                }catch (Exception e)
-                {
 
-                }
-
-
-
-            }
-        }, 1000);
 
         //tester dans la base
-        WebService.SendRequest(new LoginHandler(this, username, password));
+        WebService.SendRequest(new LoginHandler(this, username, password, progressDialog));
     }
 
-    private Eleve getEmployeFromUser(User user)
+    private Employe getEmployeFromUser(User user)
     {
         //todo get the right value from base
-        Eleve employe = new Eleve();
+        Employe employe = new Employe();
         employe.nom = "Nom Dummy";
         employe.prenom = "Surnom Dummy";
         employe.matricul = "userEmploy id";

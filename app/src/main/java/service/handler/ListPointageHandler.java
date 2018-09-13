@@ -9,9 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import adapters.Eleve_VAdapter;
 import adapters.Pointage_VAdapter;
-import adapters.entity.Eleve;
 import adapters.entity.Pointage;
 
 /**
@@ -31,6 +29,9 @@ public class ListPointageHandler extends  WebServiceHandler {
         if (stream == null)
             return;
         List<Pointage> listEleve = new Gson().fromJson(stream, new TypeToken<List<Pointage>>(){}.getType());
+
+
+
         Pointage_VAdapter eleve_vAdapter = new Pointage_VAdapter(listEleve, this.activity);
         //attaching data from the adapter to the real recyclerview
         recyclerView.setAdapter(eleve_vAdapter);

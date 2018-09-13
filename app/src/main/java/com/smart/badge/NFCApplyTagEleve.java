@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 import service.NFCCore;
 
 
@@ -23,7 +23,7 @@ public class NFCApplyTagEleve extends AppCompatActivity {
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     private DatabaseReference mDatabase;
-    Eleve currentEleve;
+    Employe currentEleve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class NFCApplyTagEleve extends AppCompatActivity {
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        currentEleve =  (Eleve) getIntent().getSerializableExtra("eleve");
-        Toast.makeText(getApplicationContext(), "Approcher voter badge pour assigner l'matricul de l'élève au tag",
+        currentEleve =  (Employe) getIntent().getSerializableExtra("eleve");
+        Toast.makeText(getApplicationContext(), "Approcher voter badge pour assigner l'matricul de l'employé au tag",
                 Toast.LENGTH_SHORT).show();
 
     }

@@ -1,5 +1,7 @@
 package service.handler;
 
+import android.app.ProgressDialog;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.smart.badge.LoginActivity;
@@ -18,11 +20,13 @@ public class LoginHandler extends  WebServiceHandler {
     private  String login;
     private  String password;
     private  LoginActivity loginActivity;
+    private  ProgressDialog progressDialog;
 
-    public LoginHandler(LoginActivity a, String login, String password){
+    public LoginHandler(LoginActivity a, String login, String password, ProgressDialog progressDialog){
         this.loginActivity = a;
         this.login = login;
         this. password = password;
+        this.progressDialog = progressDialog;
     }
 
     @Override
@@ -34,6 +38,7 @@ public class LoginHandler extends  WebServiceHandler {
         }else{
             this.loginActivity.Error();
         }
+        this.progressDialog.dismiss();
     }
 
     @Override

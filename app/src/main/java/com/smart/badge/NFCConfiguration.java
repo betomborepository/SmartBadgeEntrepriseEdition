@@ -12,17 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-import adapters.entity.Eleve;
-import fragments.Employe;
-import service.DataCore;
+import adapters.entity.Employe;
 import service.NFCCore;
 
 public class NFCConfiguration extends AppCompatActivity {
@@ -30,7 +24,7 @@ public class NFCConfiguration extends AppCompatActivity {
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     private DatabaseReference mDatabase;
-    Eleve currentEmploye;
+    Employe currentEmploye;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +32,7 @@ public class NFCConfiguration extends AppCompatActivity {
         setContentView(R.layout.activity_nfc_onfiguration);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0,new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        this.currentEmploye = (Eleve) this.getIntent().getSerializableExtra("employe");
+        this.currentEmploye = (Employe) this.getIntent().getSerializableExtra("employe");
     }
 
 

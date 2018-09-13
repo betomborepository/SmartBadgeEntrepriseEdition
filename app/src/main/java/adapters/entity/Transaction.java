@@ -7,11 +7,12 @@ import java.util.Date;
  */
 
 public class Transaction {
-    public String ID;
+    public String id;
     public String poste;
     public String date;
+    public String createdAt;
     public String nomEleve;
-    public  String IDEleve;
+    public  String idEleve;
     public  int montant;
 
     public Transaction()
@@ -20,13 +21,13 @@ public class Transaction {
     }
 
 
-    public Transaction(String id, String poste, String nomEleve, String IDEleve )
+    public Transaction(String id, String poste, String nomEleve, String IdEleve)
     {
-        this.ID = id;
+        this.id = id;
         this.poste = poste;
         this.date = new Date().toString();
         this.nomEleve =nomEleve;
-        this.IDEleve = IDEleve;
+        this.idEleve = IdEleve;
     }
 
 

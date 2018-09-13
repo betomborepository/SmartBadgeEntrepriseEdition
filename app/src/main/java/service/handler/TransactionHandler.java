@@ -10,36 +10,43 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import adapters.Eleve_VAdapter;
+import adapters.Transaction_VAdapter;
 import adapters.entity.Employe;
+import adapters.entity.Transaction;
 
 /**
- * Created by hp on 28/08/2018.
+ * Created by hp on 12/09/2018.
  */
 
-public class ListEmployeHandler extends WebServiceHandler{
+public class TransactionHandler extends  WebServiceHandler {
 
-
-    public ListEmployeHandler(String url, Activity activity, RecyclerView v ){
+    public TransactionHandler(String url, Activity activity ,RecyclerView recyclerView){
         this.url = url;
-        recyclerView = v;
+        this.recyclerView = recyclerView;
         this.activity = activity;
     }
 
     @Override
     public void onDataLoade(InputStreamReader stream) {
-        if (stream == null)
+
+        if(stream == null)
             return;
-        List<Employe> listEleve = new Gson().fromJson(stream, new TypeToken<List<Employe>>(){}.getType());
-        Eleve_VAdapter eleve_vAdapter = new Eleve_VAdapter(listEleve, this.activity);
+        List<Transaction> listTransaction = new Gson().fromJson(stream, new TypeToken<List<Transaction>>(){}.getType());
+        Transaction_VAdapter transaction_vAdapter = new Transaction_VAdapter(listTransaction, activity);
+
+        System.out.println("size :" + listTransaction.size());
         //attaching data from the adapter to the real recyclerview
-        recyclerView.setAdapter(eleve_vAdapter);
+        recyclerView.setAdapter(transaction_vAdapter);
+
 
     }
+
 
     @Override
     public String GetUrl() {
         return url;
     }
+
 
     @Override
     public String getRequestMethod() {

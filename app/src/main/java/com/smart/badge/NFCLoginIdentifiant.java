@@ -1,6 +1,5 @@
 package com.smart.badge;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -22,14 +21,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStreamReader;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import adapters.entity.Eleve;
 import adapters.entity.User;
 import service.NFCCore;
 import service.SessionCore;
 import service.WebService;
+import service.handler.NFCLoginHandler;
 import service.handler.WebServiceHandler;
 
 
@@ -92,58 +90,7 @@ public class NFCLoginIdentifiant extends AppCompatActivity {
                 NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_TECH_DISCOVERED.equals(action))
         {
-            final NFCLoginIdentifiant activity = this;
-            WebServiceHandler handler = new WebServiceHandler() {
-                @Override
-                public void onDataLoade(InputStreamReader stream) {
-                    List<User> listEmp = new Gson().fromJson(stream, new TypeToken<List<User>>(){}.getType());
-                    for (User user: listEmp) {
-                        if(user.id.equals(nfcVal)){
-                            activity.Connecter(user);
-                        }
-                    }
-                    activity.error();
-                }
-
-                @Override
-                public String GetUrl (){
-                    return  activity.getResources().getString(R.string.web_service_all_user_url);
-                }
-
-                @Override
-                public String getRequestMethod() {
-                    return  "GET";
-                }
-            };
-
-
-
-
-            //tester dans la base
-            FirebaseDatabase db = FirebaseDatabase.getInstance();
-            mDatabase = db.getReference("users");
-            ValueEventListener valueEventListener = mDatabase.addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        User user = postSnapshot.getValue(User.class);
-
-                        if(nfcVal.contains(user.id))
-                        {
-                            Toast.makeText(getApplicationContext(), "Votre badge n'a été identifié. Bienvenue " + user.login,
-                                    Toast.LENGTH_SHORT).show();
-                            Connecter(user);
-                            return;
-                        }
-                    }
-                    error();
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.wtf("une erreur dans firebase a été signalé", "une erreu dans firebase a été signalé");
-                }
-            });
+            WebService.SendRequest(new NFCLoginHandler(this, nfcVal));
         }
     }
 

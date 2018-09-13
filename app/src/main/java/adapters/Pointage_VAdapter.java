@@ -42,8 +42,12 @@ public class Pointage_VAdapter  extends   RecyclerView.Adapter<Pointage_VHolder>
     public void onBindViewHolder(@NonNull Pointage_VHolder holder, int position) {
         Pointage p = getPointage(position);
 
-        holder.eleve_name.setText(p.nomEleve);
-        holder.pointage_heure.setText(p.getDate());
+        String nom = "Unknown";
+        if(null != p.pointageEmploye){
+            nom = p.pointageEmploye.nom + " " + p.pointageEmploye.prenom + "[" + p.pointageEmploye.matricul + "]";
+        }
+        holder.eleve_name.setText(nom);
+        holder.pointage_heure.setText(p.getCreatedAt());
         //holder.pointage_poste.setText(p.getPoste());
     }
 

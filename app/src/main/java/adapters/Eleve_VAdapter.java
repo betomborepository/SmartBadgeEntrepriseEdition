@@ -11,7 +11,7 @@ import com.smart.badge.R;
 
 import java.util.List;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 
 
 /**
@@ -20,10 +20,10 @@ import adapters.entity.Eleve;
 
 public class Eleve_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
 {
-    private List<Eleve> ListEleves;
+    private List<Employe> ListEleves;
     private  Context context;
 
-    public  Eleve_VAdapter(List<Eleve> eleves, Context context)
+    public  Eleve_VAdapter(List<Employe> eleves, Context context)
     {
         this.ListEleves =eleves;
         this.context = context;
@@ -39,7 +39,7 @@ public class Eleve_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
 
     @Override
     public void onBindViewHolder(@NonNull Eleve_VHolder holder, int position) {
-        Eleve el = getEleve(position);
+        Employe el = getEleve(position);
 
         holder.itemView.setTag(el);
         holder.eleve_name.setText(el.getListName());
@@ -56,7 +56,7 @@ public class Eleve_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
     }
 
 
-    private  Eleve getEleve(int position)
+    private Employe getEleve(int position)
     {
         return  ListEleves.get(position);
     }

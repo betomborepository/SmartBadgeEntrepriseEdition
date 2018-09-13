@@ -9,8 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import adapters.entity.Eleve;
-import adapters.entity.PointageSatistique;
+import adapters.entity.Employe;
 import service.handler.WebServiceHandler;
 
 /**
@@ -28,9 +27,9 @@ class IdentificationHandler extends WebServiceHandler {
 
     @Override
     public void onDataLoade(InputStreamReader stream) {
-        List<Eleve> listDateDat = new Gson().fromJson(stream, new TypeToken<List<Eleve>>(){}.getType());
+        List<Employe> listDateDat = new Gson().fromJson(stream, new TypeToken<List<Employe>>(){}.getType());
 
-        for (Eleve emp: listDateDat) {
+        for (Employe emp: listDateDat) {
             if(listId.contains(emp.matricul)){
                 Toast.makeText(this.nfcIdentification.getApplicationContext(), "l'élève a été identifier",
                         Toast.LENGTH_SHORT).show();

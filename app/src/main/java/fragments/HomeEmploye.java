@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.smart.badge.R;
 
-import adapters.entity.Eleve;
 import service.SessionCore;
 
 
@@ -25,7 +24,8 @@ public class HomeEmploye extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_employe, container, false);
         View image = view.findViewById(R.id.image_employe_fiche);
-        Eleve ep = SessionCore.getCurrentUser(this.getActivity()).userEmploy;
+        adapters.entity.Employe ep = SessionCore.getCurrentUser(this.getActivity()).userEmploy;
+
         image.setTag(ep);
 
         return view;

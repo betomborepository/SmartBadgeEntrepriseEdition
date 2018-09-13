@@ -7,20 +7,17 @@ import com.google.gson.reflect.TypeToken;
 import com.smart.badge.R;
 
 import java.io.InputStreamReader;
-import java.net.Inet4Address;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
-import service.WebService;
 
 /**
  * Created by hp on 03/09/2018.
@@ -39,7 +36,7 @@ public class EmployeStatistiqueHandler extends WebServiceHandler
     public void onDataLoade(InputStreamReader stream) {
         if(stream == null)
             return;
-        List<Eleve> eleves = new Gson().fromJson(stream, new TypeToken<List<Eleve>>(){}.getType());
+        List<Employe> eleves = new Gson().fromJson(stream, new TypeToken<List<Employe>>(){}.getType());
 
         List<SliceValue> values = new ArrayList<SliceValue>();
         // TODO: 18/08/2018 populate with the right value

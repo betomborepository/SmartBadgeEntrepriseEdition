@@ -8,15 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.smart.badge.CreationActivity;
-import com.smart.badge.DetailActivity;
 import com.smart.badge.NFCConfiguration;
 import com.smart.badge.R;
 
 import java.util.List;
 
-import adapters.Eleve_VHolder;
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 
 
 /**
@@ -25,10 +22,10 @@ import adapters.entity.Eleve;
 
 public class EleveConfiguration_VAdapter extends RecyclerView.Adapter<Eleve_VHolder>
 {
-    private List<Eleve> ListEleves;
+    private List<Employe> ListEleves;
     private  Context context;
 
-    public EleveConfiguration_VAdapter(List<Eleve> eleves, Context context)
+    public EleveConfiguration_VAdapter(List<Employe> eleves, Context context)
     {
         this.ListEleves =eleves;
         this.context = context;
@@ -44,7 +41,7 @@ public class EleveConfiguration_VAdapter extends RecyclerView.Adapter<Eleve_VHol
 
     @Override
     public void onBindViewHolder(@NonNull Eleve_VHolder holder, int position) {
-        Eleve el = getEleve(position);
+        Employe el = getEleve(position);
 
         holder.itemView.setTag(el);
         holder.eleve_name.setText(el.getListName());
@@ -62,7 +59,7 @@ public class EleveConfiguration_VAdapter extends RecyclerView.Adapter<Eleve_VHol
     }
 
 
-    private  Eleve getEleve(int position)
+    private Employe getEleve(int position)
     {
         return  ListEleves.get(position);
     }
@@ -70,8 +67,8 @@ public class EleveConfiguration_VAdapter extends RecyclerView.Adapter<Eleve_VHol
 
     private class EleveConfiguratonOnClikListener implements View.OnClickListener{
 
-        Eleve currentEmploye;
-        public EleveConfiguratonOnClikListener(Eleve employe){
+        Employe currentEmploye;
+        public EleveConfiguratonOnClikListener(Employe employe){
             currentEmploye = employe;
         }
 

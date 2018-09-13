@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.smart.badge.StatistiqueEmploye;
-
-import adapters.entity.Eleve;
-import fragments.Employe;
 import fragments.Home;
 import fragments.HomeCantine;
 import fragments.HomeEmploye;
@@ -36,7 +32,7 @@ public class MainPager_VAdapter  extends FragmentStatePagerAdapter
         if(userType.equals( "userEmploy")){
             this.NumbOfTabs = this.EmployeNumboftabs;
             this.Titles = EmployeTitles;
-        }if (userType.equals( "cantine")){
+        }else if (userType.equals( "cantine")){
         this.NumbOfTabs = this.CantineNumboftabs;
             this.Titles = CantineTitles;
 
@@ -71,7 +67,7 @@ public class MainPager_VAdapter  extends FragmentStatePagerAdapter
         if (position == 0) { // if the position is 0 we are returning the First tab
             return new Home();
         } else if (position == 1) {
-            return new Employe();
+            return new fragments.Employe();
         } else if (position == 2) {
             return new Pointage();
         } else if (position == 3){

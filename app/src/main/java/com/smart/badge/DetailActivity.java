@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 
 import adapters.Profile;
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class DetailActivity extends AppCompatActivity {
     private AppCompatTextView detail_name, detail_about, detail_active_time;
 
     private Profile profile;
-    private Eleve currentEleve;
+    public Employe currentEleve;
 
 
     @Override
@@ -41,24 +41,18 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
 
-            try {
-                Eleve el = (Eleve) getIntent().getSerializableExtra("eleve");
+                Employe el = (Employe) getIntent().getSerializableExtra("eleve");
                 currentEleve = el;
                 initialize(el);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "ERROR on parsing received data: \n"+e.toString(),
-                        Toast.LENGTH_LONG).show();
-            }
 
         }
     }
 
 
-    private void initialize(Eleve el) {
+    private void initialize(Employe el) {
 
-         AppCompatTextView heading1 = findViewById(R.id.detail_heading_1);
+        AppCompatTextView heading1 = findViewById(R.id.detail_heading_1);
         AppCompatTextView heading2 = findViewById(R.id.detail_heading_2);
 
         heading1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -67,14 +61,26 @@ public class DetailActivity extends AppCompatActivity {
 
         AppCompatTextView detail_immatricul = findViewById(R.id.detail_matricul_value);
         AppCompatTextView detail_surName = findViewById(R.id.detail_surname_value);
-         detail_name = findViewById(R.id.detail_name_value);
+        AppCompatTextView adresse = findViewById(R.id.detail_adresse_value);
+        AppCompatTextView age = findViewById(R.id.detail_age_value);
+        AppCompatTextView nomFonction = findViewById(R.id.detail_fonction_nom_value);
+        AppCompatTextView departement = findViewById(R.id.detail_fonction_departement_value);
+        AppCompatTextView argent = findViewById(R.id.detail_argent_val);
+
+
+        detail_name = findViewById(R.id.detail_name_value);
 
         //AppCompatTextView detail_description = findViewById(R.id.det);
 
         detail_immatricul.setText(el.matricul);
         detail_name.setText(el.nom);
         detail_surName.setText(el.prenom);
+        adresse.setText(el.adresse);
+        age.setText(el.age);
+        argent.setText("" + el.argent);
 
+        nomFonction.setText(el.employeFonction.nom);
+        departement.setText(el.employeFonction.departement);
 
     }
 

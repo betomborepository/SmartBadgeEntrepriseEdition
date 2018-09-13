@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import adapters.entity.Employe;
 import service.DataCore;
 import service.NFCCore;
 
@@ -92,12 +93,12 @@ public class NFCReset extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    adapters.entity.Eleve eleve = postSnapshot.getValue(adapters.entity.Eleve.class);
+                    Employe eleve = postSnapshot.getValue(Employe.class);
                     if(listId.contains(eleve.matricul) )
                     {
 
                         new DataCore().updateEmploye(eleve);
-                        Toast.makeText(getApplicationContext(), "l'élève a été identifier",
+                        Toast.makeText(getApplicationContext(), "l'employé a été identifier",
                                 Toast.LENGTH_SHORT).show();
 
 
@@ -122,7 +123,7 @@ public class NFCReset extends AppCompatActivity {
 
     public void errorPointage()
     {
-        Toast.makeText(getApplicationContext(), "Elève non reconnu!",
+        Toast.makeText(getApplicationContext(), "Employé non reconnu!",
                 Toast.LENGTH_SHORT).show();
     }
 

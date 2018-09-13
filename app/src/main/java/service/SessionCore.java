@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
+import adapters.entity.Fonction;
 import adapters.entity.User;
 
 /**
@@ -35,9 +36,11 @@ public class SessionCore {
         editor.putString("nom", user.userEmploy.nom);
         editor.putString("prenom", user.userEmploy.prenom);
         editor.putString("matricule", user.userEmploy.matricul);
+        editor.putString("id_employe", user.userEmploy.id);
 
 
-
+        editor.putString("nom_fonction", user.userEmploy.employeFonction.nom);
+        editor.putString("departement_fonction", user.userEmploy.employeFonction.departement);
         editor.commit();
     }
 
@@ -51,12 +54,16 @@ public class SessionCore {
         String nom = pref.getString("nom", "");
         String prenom = pref.getString("prenom", "");
         String matricule = pref.getString("matricule", "");
+        String id = pref.getString("id_employe","");
 
 
         String login = pref.getString("login", "");
         String type = pref.getString("type", "");
         String password = pref.getString("password", "");
         String usermatricule = pref.getString("user_immatricule", "");
+
+        String nomFonction = pref.getString("nom_fonction", "");
+        String departementFonction = pref.getString("departement_fonction", "");
         User user =new User();
         if(usermatricule.isEmpty())
             return  null;
@@ -66,15 +73,29 @@ public class SessionCore {
         user.password = password;
         user.id = usermatricule;
 
-        user.userEmploy = new Eleve();
+        user.userEmploy = new Employe();
         user.userEmploy.matricul = matricule;
         user.userEmploy.prenom = prenom;
         user.userEmploy.nom = nom;
+        user.userEmploy.id = id;
+
+        user.userEmploy.employeFonction = new Fonction();
+        user.userEmploy.employeFonction.nom = nomFonction;
+        user.userEmploy.employeFonction.departement = departementFonction;
+
 
 
         return  user;
     }
 
 
+    public static void updateCurrentUserEmploye(Activity context, Employe emp) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
 
+        editor.putString("nom", emp.nom);
+        editor.putString("prenom", emp.prenom);
+        editor.putString("matricule", emp.matricul);
+        editor.putString("id_employe", emp.id);
+
+    }
 }

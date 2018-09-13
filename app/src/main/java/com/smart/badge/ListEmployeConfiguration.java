@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.animation.Animation;
 
 import adapters.Profile_VAdapter;
-import adapters.entity.Eleve;
+import adapters.entity.Employe;
 import fragments.EmployeConfiguration;
-import fragments.MainTabsFragments;
-import fragments.Satistique;
 
 public class ListEmployeConfiguration extends AppCompatActivity {
 
@@ -61,9 +59,9 @@ public class ListEmployeConfiguration extends AppCompatActivity {
 
     public void goDetailEleve(View v)
     {
-        Eleve el = (Eleve) v.findViewById(R.id.detail).getTag();
+        Employe el = (Employe) v.findViewById(R.id.detail).getTag();
         Intent intent = new Intent(ListEmployeConfiguration.this, NFCConfiguration.class);
-        intent.putExtra("eleve", el);
+        intent.putExtra("employe", el);
         startActivity(intent);
     }
 

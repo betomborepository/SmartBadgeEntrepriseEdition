@@ -1,5 +1,7 @@
 package adapters.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,23 +11,20 @@ import java.util.Date;
 public class Pointage {
     public String ID;
     public String poste;
-    public String date;
-    public String nomEleve;
-    public  String IDEleve;
-
+    public String createdAt;
+    public Employe pointageEmploye;
     public Pointage()
     {
 
     }
 
 
-    public Pointage(String id, String poste, String nomEleve, String IDEleve )
+    public Pointage(String id, String poste )
     {
         this.ID = id;
         this.poste = poste;
-        this.date = new Date().toString();
-        this.nomEleve =nomEleve;
-        this.IDEleve = IDEleve;
+        this.createdAt = new Date().toString();
+
     }
 
 
@@ -42,8 +41,19 @@ public class Pointage {
 
 
 
-    public String getDate() {
-        return date;
+    public String getCreatedAt()
+    {
+        try {
+            if(createdAt == null)
+                return  "";
+            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")).parse(createdAt.replaceAll("Z$", "+0000"));
+            return  new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return createdAt;
     }
 
 

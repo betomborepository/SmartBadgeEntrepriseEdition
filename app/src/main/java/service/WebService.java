@@ -1,20 +1,14 @@
 package service;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
-import adapters.entity.Eleve;
 import service.handler.WebServiceHandler;
 
 /**
@@ -33,6 +27,7 @@ public  class WebService {
                 try {
                     String URL = handler.GetUrl();
                     // Envoi de la requête
+                    System.out.println(URL);
 
                     if(handler.objectToSend != null){
                         String objeParam = ObjectToParam(handler.objectToSend);
@@ -79,7 +74,6 @@ public  class WebService {
             // Ouverture de la connexion
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod(methode);
-
 
             // Connexion à l'URL
             urlConnection.connect();

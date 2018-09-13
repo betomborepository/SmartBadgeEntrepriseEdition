@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.smart.badge.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import adapters.entity.Transaction;
@@ -45,8 +47,15 @@ public class Transaction_VAdapter extends   RecyclerView.Adapter<Transaction_VAd
         Transaction p = getTransaction(position);
 
         holder.montant.setText("" + p.montant);
-        holder.nomEmploye.setText(p.nomEleve + " [" + p.IDEleve + "]");
-        holder.date.setText(p.date);
+        holder.nomEmploye.setText(p.nomEleve + " [" + p.idEleve + "]");
+        try {
+            Date date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")).parse(p.createdAt.replaceAll("Z$", "+0000"));
+            holder.date.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         //holder.pointage_poste.setText(p.getPoste());
     }
 
